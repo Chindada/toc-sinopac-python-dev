@@ -10,7 +10,7 @@ RUN apt update -y && \
     rm -rf /var/lib/apt/lists/* && \
     git config --global user.name "TimHsu@DevContainer" && \
     git config --global user.email "maochindada@gmail.com" && \
-    mkdir dev_share
+    mkdir dev-share
 
 RUN mkdir /root/.ssh/ && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
