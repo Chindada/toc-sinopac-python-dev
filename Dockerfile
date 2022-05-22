@@ -18,13 +18,10 @@ RUN mkdir /root/.ssh/ && \
     touch /root/.ssh/known_hosts && \
     ssh-keyscan gitlab.tocraw.com >> /root/.ssh/known_hosts
 
-WORKDIR /utils
-RUN curl -fSL https://github.com/protocolbuffers/protobuf/releases/download/v3.20.1/protoc-3.20.1-linux-x86_64.zip --output protobuf.zip && \
-    unzip protobuf.zip -d protobuf
 
-ENV TZ=Asia/Taipei
-ENV PATH="$PATH:/utils/protobuf/bin"
 ENV PYLINTHOME=/toc-sinopac-python
+ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
+ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 
 WORKDIR /
 RUN git clone git@gitlab.tocraw.com:root/toc-sinopac-python.git /toc-sinopac-python
