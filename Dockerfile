@@ -4,7 +4,7 @@ USER root
 ARG SSH_PRIVATE_KEY
 WORKDIR /
 RUN apt update -y && \
-    apt install -y tzdata clang-format && \
+    apt install -y tzdata && \
     apt autoremove -y && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
