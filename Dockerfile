@@ -19,6 +19,10 @@ RUN npm install -g commitizen && \
     echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc
 
 
+RUN pip install pre-commit && \
+    pre-commit install
+
+
 RUN mkdir /root/.ssh/ && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
