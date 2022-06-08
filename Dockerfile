@@ -16,11 +16,8 @@ RUN apt update -y && \
 RUN npm install -g commitizen && \
     npm install -g cz-conventional-changelog && \
     npm install -g conventional-changelog-cli && \
-    echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc
-
-
-RUN pip install pre-commit && \
-    pre-commit install
+    echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc && \
+    pip install pre-commit
 
 
 RUN mkdir /root/.ssh/ && \
@@ -38,5 +35,6 @@ ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 WORKDIR /
 RUN git clone git@gitlab.tocraw.com:root/toc-sinopac-python.git /toc-sinopac-python
 WORKDIR /toc-sinopac-python
-RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
+RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt && \
+    pre-commit install
 # RUN mypy --config-file=./mypy.ini ./src/main.py ./src/mq_topic.py
