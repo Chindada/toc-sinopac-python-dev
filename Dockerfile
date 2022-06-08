@@ -26,5 +26,5 @@ ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 WORKDIR /
 RUN git clone git@gitlab.tocraw.com:root/toc-sinopac-python.git /toc-sinopac-python
 WORKDIR /toc-sinopac-python
-RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
+# RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
 # RUN mypy --config-file=./mypy.ini ./src/main.py ./src/mq_topic.py
