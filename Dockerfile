@@ -4,13 +4,20 @@ USER root
 ARG SSH_PRIVATE_KEY
 WORKDIR /
 RUN apt update -y && \
-    apt install -y tzdata && \
+    apt install -y tzdata npm && \
     apt autoremove -y && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     git config --global user.name "TimHsu@DevContainer" && \
     git config --global user.email "maochindada@gmail.com" && \
     mkdir dev-share
+
+
+RUN npm install -g commitizen && \
+    npm install -g cz-conventional-changelog && \
+    npm install -g conventional-changelog-cli && \
+    echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc
+
 
 RUN mkdir /root/.ssh/ && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
@@ -22,6 +29,7 @@ RUN mkdir /root/.ssh/ && \
 ENV PYLINTHOME=/toc-sinopac-python
 ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
+
 
 WORKDIR /
 RUN git clone git@gitlab.tocraw.com:root/toc-sinopac-python.git /toc-sinopac-python
