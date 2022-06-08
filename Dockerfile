@@ -1,4 +1,4 @@
-FROM python:3.7.13-bullseye
+FROM python:3.10.5-bullseye
 USER root
 
 ARG SSH_PRIVATE_KEY
