@@ -17,7 +17,7 @@ RUN npm install -g commitizen && \
     npm install -g cz-conventional-changelog && \
     npm install -g conventional-changelog-cli && \
     echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc && \
-    pip install pre-commit
+    pip install --no-warn-script-location --no-cache-dir pre-commit
 
 
 RUN mkdir /root/.ssh/ && \
