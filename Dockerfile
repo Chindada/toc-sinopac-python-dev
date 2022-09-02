@@ -28,6 +28,7 @@ RUN mkdir /root/.ssh/ && \
 
 
 ENV PYLINTHOME=/toc-sinopac-python
+ENV PYTHONPATH=/toc-sinopac-python/pb
 ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 

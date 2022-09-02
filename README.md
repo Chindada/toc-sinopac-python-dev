@@ -3,8 +3,9 @@
 ## Run Container Command
 
 ```sh
-docker kill toc-sinopac-python-dev
-docker rmi -f $(docker images -a -q) && docker system prune --volumes -f
+docker stop toc-sinopac-python-dev
+docker system prune --volumes -f
+docker rmi -f $(docker images -a -q)
 docker run -dt --name toc-sinopac-python-dev \
     --restart=always \
     -p 56666:56666 \
