@@ -2,7 +2,6 @@ FROM python:3.10.6-bullseye
 USER root
 
 ARG SSH_PRIVATE_KEY
-RUN echo "${SSH_PRIVATE_KEY}"
 
 # WORKDIR /
 # RUN apt update -y && \
@@ -23,9 +22,9 @@ RUN echo "${SSH_PRIVATE_KEY}"
 
 RUN mkdir /root/.ssh/ && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
-    cat /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
     touch /root/.ssh/known_hosts && \
+    cat /root/.ssh/id_ed25519 && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 
