@@ -24,7 +24,7 @@ RUN mkdir /root/.ssh/ && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
     touch /root/.ssh/known_hosts && \
-    ssh-keyscan gitlab.tocraw.com >> /root/.ssh/known_hosts
+    ssh-keyscan git@github.com >> /root/.ssh/known_hosts
 
 
 ENV PYLINTHOME=/toc-sinopac-python
