@@ -1,7 +1,7 @@
 FROM python:3.10.6-bullseye
 USER root
 
-# ARG SSH_PRIVATE_KEY
+ARG SSH_PRIVATE_KEY
 
 # WORKDIR /
 # RUN apt update -y && \
@@ -20,10 +20,9 @@ USER root
 #     echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc && \
 #     pip install --no-warn-script-location --no-cache-dir pre-commit
 
-COPY key.txt /root/.ssh/id_ed25519
 
 RUN mkdir /root/.ssh/ && \
-    # echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
+    echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
     touch /root/.ssh/known_hosts && \
     cat /root/.ssh/id_ed25519 && \
