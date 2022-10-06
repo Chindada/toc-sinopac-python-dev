@@ -22,7 +22,7 @@ RUN echo "${SSH_PRIVATE_KEY}"
 #     pip install --no-warn-script-location --no-cache-dir pre-commit
 
 RUN mkdir /root/.ssh/ && \
-    echo "${SSH_PRIVATE_KEY}\n" > /root/.ssh/id_ed25519 && \
+    echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
     touch /root/.ssh/known_hosts && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
