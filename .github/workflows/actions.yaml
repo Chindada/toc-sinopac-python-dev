@@ -9,7 +9,10 @@ jobs:
     # runs-on: self-hosted
     steps:
       - uses: docker/build-push-action@v3.1.1
-      - run: docker build --build-arg SSH_PRIVATE_KEY="$(cat ${{ secrets.timhsu_key }})" -t toc-sinopac-python-dev:latest .
+        with:
+          context: .
+          build-args: SSH_PRIVATE_KEY="${{ secrets.timhsu_key }}"
+      # - run: docker build --build-arg SSH_PRIVATE_KEY="$(cat ${{ secrets.timhsu_key }})" -t toc-sinopac-python-dev:latest .
       # - run: docker push --all-tags $CI_REGISTRY_IMAGE
       # - run: docker rmi $IMAGE_TAG $LATEST_TAG
-      - run: docker system prune --volumes -f
+      # - run: docker system prune --volumes -f
