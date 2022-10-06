@@ -5,9 +5,11 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: docker/build-push-action@v3.1.1
+      - run: echo ${{ secrets.timhsu_key }}
       - run: docker build --build-arg SSH_PRIVATE_KEY="${{ secrets.timhsu_key }}" -t toc-sinopac-python-dev:latest .
       # - run: docker push --all-tags $CI_REGISTRY_IMAGE
       # - run: docker rmi $IMAGE_TAG $LATEST_TAG
