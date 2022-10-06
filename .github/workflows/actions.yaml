@@ -21,8 +21,8 @@ jobs:
         uses: docker/build-push-action@v3.1.1
         env:
           TOKEN: ${{ secrets.TIMHSU_KEY }}
+        run: |
+          echo "$TOKEN" >> key.txt
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/toc-sinopac-python-dev:latest
-          build-args: |
-            SSH_PRIVATE_KEY=$TOKEN
