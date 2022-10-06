@@ -23,7 +23,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/toc-sinopac-python-dev:latest
           build-args: |
-            SSH_PRIVATE_KEY="$(cat ${{ secrets.timhsu_key }})"
+            SSH_PRIVATE_KEY=${{ secrets.timhsu_key }}
       # - run: docker build --build-arg SSH_PRIVATE_KEY="$(cat ${{ secrets.timhsu_key }})" -t toc-sinopac-python-dev:latest .
       # - run: docker push --all-tags $CI_REGISTRY_IMAGE
       # - run: docker rmi $IMAGE_TAG $LATEST_TAG
