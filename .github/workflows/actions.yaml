@@ -12,7 +12,8 @@ jobs:
         env:
           SUPER_SECRET: ${{ secrets.TIMHSU_KEY }}
         run: |
-          cat "$SUPER_SECRET"
+          echo "$SUPER_SECRET" >> ./temp.txt
+          cat ./temp.txt
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
       # - name: Set up Docker Buildx
