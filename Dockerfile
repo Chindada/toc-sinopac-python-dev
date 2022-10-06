@@ -12,7 +12,7 @@ RUN apt update -y && \
     git config --global user.email "maochindada@gmail.com" && \
     mkdir dev-share
 
-
+RUN pip install --upgrade pip
 RUN npm install -g commitizen && \
     npm install -g cz-conventional-changelog && \
     npm install -g conventional-changelog-cli && \
@@ -34,7 +34,7 @@ ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 
 
 WORKDIR /
-RUN git clone git@gitlab.tocraw.com:root/toc-sinopac-python.git /toc-sinopac-python
+RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python
 WORKDIR /toc-sinopac-python
 
 RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
