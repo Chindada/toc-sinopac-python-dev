@@ -11,6 +11,7 @@ docker rmi -f $(docker images -a -q)
 docker run -d \
   --restart always \
   --name toc-rabbitmq \
+  -p 5672:5672 \
   -e RABBITMQ_DEFAULT_USER=admin \
   -e RABBITMQ_DEFAULT_PASS=password \
   rabbitmq:3.11.4-management
