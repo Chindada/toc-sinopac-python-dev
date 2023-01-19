@@ -15,7 +15,7 @@ docker run -d \
   -p 15672:15672 \
   -e RABBITMQ_DEFAULT_USER=admin \
   -e RABBITMQ_DEFAULT_PASS=password \
-  rabbitmq:3.11.4-management
+  rabbitmq:3.11.5-management
 
 docker run -dt --name toc-sinopac-python-dev \
     --restart=always \

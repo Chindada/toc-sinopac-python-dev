@@ -29,11 +29,10 @@ RUN mkdir /root/.ssh/ && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 
-ENV PYLINTHOME=/toc-sinopac-python
-ENV PYTHONPATH=/toc-sinopac-python/pb
+# ENV PYLINTHOME=/toc-sinopac-python
+# ENV PYTHONPATH=/toc-sinopac-python/pb
 ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
-
 
 WORKDIR /
 RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python
