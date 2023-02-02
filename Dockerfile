@@ -45,5 +45,5 @@ WORKDIR $HOME
 RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git $HOME/toc-sinopac-python
 WORKDIR $HOME/toc-sinopac-python
 
-RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
-RUN ./scripts/install_dev_dependency.sh
+# RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
+RUN make update
