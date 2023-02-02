@@ -41,7 +41,7 @@ ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 
 WORKDIR /home/docker
-RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python
+RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /home/docker/toc-sinopac-python
 WORKDIR /home/docker/toc-sinopac-python
 
 RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
