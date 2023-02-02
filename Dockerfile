@@ -3,6 +3,11 @@ USER root
 
 ARG SSH_PRIVATE_KEY
 
+RUN groupadd -g $GID docker-users && \
+    useradd -m --no-log-init -s /bin/bash -u 1000 -g 1000 docker && \
+    echo "docker:docker" | chpasswd && \
+    adduser docker sudo
+
 WORKDIR /
 RUN apt update -y && \
     apt install -y tzdata npm && \
@@ -20,13 +25,14 @@ RUN npm install -g commitizen && \
     echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc && \
     pip install --no-warn-script-location --no-cache-dir pre-commit
 
+USER docker
 
-RUN mkdir /root/.ssh/ && \
-    echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
-    chmod 600 /root/.ssh/id_ed25519 && \
-    touch /root/.ssh/known_hosts && \
-    cat /root/.ssh/id_ed25519 && \
-    ssh-keyscan github.com >> /root/.ssh/known_hosts
+RUN mkdir /home/docker/.ssh/ && \
+    echo "${SSH_PRIVATE_KEY}" > /home/docker/.ssh/id_ed25519 && \
+    chmod 600 /home/docker/.ssh/id_ed25519 && \
+    touch /home/docker/.ssh/known_hosts && \
+    cat /home/docker/.ssh/id_ed25519 && \
+    ssh-keyscan github.com >> /home/docker/.ssh/known_hosts
 
 
 # ENV PYLINTHOME=/toc-sinopac-python
