@@ -40,9 +40,9 @@ RUN mkdir /home/docker/.ssh/ && \
 ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 
-WORKDIR /
+WORKDIR /home/docker
 RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python
-WORKDIR /toc-sinopac-python
+WORKDIR /home/docker/toc-sinopac-python
 
 RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
 RUN ./scripts/install_dev_dependency.sh
