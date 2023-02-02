@@ -3,7 +3,7 @@ USER root
 
 ARG SSH_PRIVATE_KEY
 
-RUN groupadd -g $GID docker-users && \
+RUN groupadd -g 1000 docker-users && \
     useradd -m --no-log-init -s /bin/bash -u 1000 -g 1000 docker && \
     echo "docker:docker" | chpasswd && \
     adduser docker sudo
