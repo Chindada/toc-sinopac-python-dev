@@ -37,5 +37,5 @@ RUN mkdir $HOME/dev-share && \
 RUN python -m venv $HOME/toc-sinopac-python
 ENV PATH="$HOME/toc-sinopac-python/bin:$PATH"
 
-WORKDIR /toc-sinopac-python
+WORKDIR $HOME/toc-sinopac-python
 RUN make install
