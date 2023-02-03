@@ -1,49 +1,41 @@
 FROM python:3.10.8-bullseye
-USER root
 
 ARG SSH_PRIVATE_KEY
+
+RUN apt update && \
+    apt install -y tzdata npm sudo && \
+    apt autoremove -y && \
+    git config --global user.name "TimHsu@DevContainer" && \
+    git config --global user.email "maochindada@gmail.com" && \
+    npm install -g n && n 18.14.0 && hash -r && \
+    npm install -g commitizen && \
+    npm install -g cz-conventional-changelog && \
+    npm install -g conventional-changelog-cli
 
 RUN groupadd -g 1000 docker-users && \
     useradd -m --no-log-init -s /bin/bash -u 1000 -g 1000 docker && \
     echo "docker:docker" | chpasswd && \
     adduser docker sudo
 
-WORKDIR /
-RUN apt update -y && \
-    apt install -y tzdata npm && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    git config --global user.name "TimHsu@DevContainer" && \
-    git config --global user.email "maochindada@gmail.com" && \
-    mkdir dev-share
-
-RUN pip install --upgrade pip
-RUN npm install -g commitizen && \
-    npm install -g cz-conventional-changelog && \
-    npm install -g conventional-changelog-cli && \
-    echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc && \
-    pip install --no-warn-script-location --no-cache-dir pre-commit
-
 USER docker
 ENV HOME=/home/docker
 
-RUN mkdir $HOME/.ssh/ && \
+ENV SJ_LOG_PATH=$HOME/toc-sinopac-python/logs/shioaji.log
+ENV SJ_CONTRACTS_PATH=$HOME/toc-sinopac-python/data
+
+RUN mkdir $HOME/.ssh && \
     echo "${SSH_PRIVATE_KEY}" > $HOME/.ssh/id_ed25519 && \
     chmod 600 $HOME/.ssh/id_ed25519 && \
     touch $HOME/.ssh/known_hosts && \
     cat $HOME/.ssh/id_ed25519 && \
-    ssh-keyscan github.com >> $HOME/.ssh/known_hosts
+    ssh-keyscan github.com >> $HOME/.ssh/known_hosts && \
+    echo '{ "path": "cz-conventional-changelog" }' > $HOME/.czrc
 
+RUN mkdir $HOME/dev-share && \
+    git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git $HOME/toc-sinopac-python
 
-# ENV PYLINTHOME=/toc-sinopac-python
-# ENV PYTHONPATH=/toc-sinopac-python/pb
-ENV SJ_LOG_PATH=$HOME/toc-sinopac-python/logs/shioaji.log
-ENV SJ_CONTRACTS_PATH=$HOME/toc-sinopac-python/data
+RUN python -m venv $HOME/toc-sinopac-python
+ENV PATH="$HOME/toc-sinopac-python/bin:$PATH"
 
-WORKDIR $HOME
-RUN git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git $HOME/toc-sinopac-python
-WORKDIR $HOME/toc-sinopac-python
-
-# RUN pip install --no-warn-script-location --no-cache-dir -r requirements.txt
-RUN make update
+WORKDIR /toc-sinopac-python
+RUN make install
