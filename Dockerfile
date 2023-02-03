@@ -5,6 +5,8 @@ ARG SSH_PRIVATE_KEY
 RUN apt update && \
     apt install -y tzdata npm && \
     apt autoremove -y && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* && \
     git config --global user.name "TimHsu@DevContainer" && \
     git config --global user.email "maochindada@gmail.com" && \
     npm install -g n && n 18.14.0 && hash -r && \
@@ -25,5 +27,6 @@ RUN mkdir /dev-share && \
 
 ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
 ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
+
 WORKDIR /toc-sinopac-python
 RUN make update
