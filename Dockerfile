@@ -13,9 +13,6 @@ RUN apt update && \
     npm install -g conventional-changelog-cli && \
     echo '{ "path": "cz-conventional-changelog" }' > /root/.czrc
 
-ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
-ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
-
 RUN mkdir /root/.ssh && \
     echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_ed25519 && \
     chmod 600 /root/.ssh/id_ed25519 && \
@@ -24,10 +21,9 @@ RUN mkdir /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN mkdir /dev-share && \
-    git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python && \
-    python -m venv /toc-sinopac-python
+    git clone git@github.com:ToC-Taiwan/toc-sinopac-python.git /toc-sinopac-python
 
-ENV PATH="/toc-sinopac-python/bin:$PATH"
-
+ENV SJ_LOG_PATH=/toc-sinopac-python/logs/shioaji.log
+ENV SJ_CONTRACTS_PATH=/toc-sinopac-python/data
 WORKDIR /toc-sinopac-python
 RUN make update
