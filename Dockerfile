@@ -38,4 +38,4 @@ RUN python -m venv $HOME/toc-sinopac-python
 ENV PATH="$HOME/toc-sinopac-python/bin:$PATH"
 
 WORKDIR $HOME/toc-sinopac-python
-RUN make install
+RUN make update

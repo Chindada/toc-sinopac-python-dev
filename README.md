@@ -22,6 +22,6 @@ docker run -dt --name toc-sinopac-python-dev \
     --link toc-rabbitmq:toc-rabbitmq \
     -p 56666:56666 \
     -e TZ="Asia/Taipei" \
-    -v $(pwd)/dev-share:/dev-share \
+    -v $(pwd)/dev-share:/home/docker/dev-share \
     maochindada/toc-sinopac-python-dev:latest
 ```
